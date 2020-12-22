@@ -319,6 +319,12 @@ void MavlinkServer::_handle_video_stop_capture(const struct sockaddr_in &addr,
     _send_ack(addr, cmd.command, cmd.target_component, success);
 }
 
+void MavlinkServer::_handle_request_video_stream_information(const struct sockaddr_in &addr,
+                                               mavlink_command_long_t &cmd)
+{
+
+}
+
 void MavlinkServer::_handle_request_camera_capture_status(const struct sockaddr_in &addr,
                                                           mavlink_command_long_t &cmd)
 {
@@ -519,6 +525,8 @@ void MavlinkServer::_handle_mavlink_message(const struct sockaddr_in &addr, mavl
             this->_handle_request_camera_information(addr, cmd);
             break;
         case MAV_CMD_REQUEST_VIDEO_STREAM_INFORMATION:
+            log_debug("MAV_CMD_REQUEST_VIDEO_STREAM_INFORMATION");
+            this->_handle_request_video_stream_information(addr, cmd);
             break;
         case MAV_CMD_REQUEST_CAMERA_SETTINGS:
             this->_handle_request_camera_settings(addr, cmd);
